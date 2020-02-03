@@ -1,3 +1,6 @@
+variable "credentials_file" {
+}
+
 variable "default_node_count" {
   default = 1
 }
@@ -19,7 +22,6 @@ variable "name" {
 }
 
 variable "project" {
-  default = "<YOUR PROJECT ID HERE>"
 }
 
 variable "zone" {
