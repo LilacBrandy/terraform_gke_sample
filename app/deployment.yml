@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: example
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      run: example
+  template:
+    metadata:
+      labels:
+        run: example
+    spec:
+      containers:
+        - image: nginx:latest
+          imagePullPolicy: IfNotPresent
+          name: example
+          ports:
+            - containerPort: 80
+              protocol: TCP
