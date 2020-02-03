@@ -7,13 +7,13 @@ provider "google" {
 }
 
 resource "google_container_cluster" "default" {
-  name        = "${var.name}"
-  project     = "${var.project}"
+  name        = var.name
+  project     = var.project
   description = "GKE Cluster"
-  location    = "${var.region}"
+  location    = var.region
 
   remove_default_node_pool = true
-  initial_node_count       = "${var.initial_node_count}"
+  initial_node_count       = var.initial_node_count
 
   master_auth {
     username = ""
@@ -27,14 +27,14 @@ resource "google_container_cluster" "default" {
 
 resource "google_container_node_pool" "default" {
   name       = "${var.name}-node-pool"
-  project    = "${var.project}"
-  location   = "${var.region}"
-  cluster    = "${google_container_cluster.default.name}"
-  node_count = "${var.default_node_count}"
+  project    = var.project
+  location   = var.region
+  cluster    = google_container_cluster.default.name
+  node_count = var.default_node_count
 
   node_config {
     preemptible  = true # Change if your workloads are stateful
-    machine_type = "${var.machine_type}"
+    machine_type = var.machine_type
 
     metadata = {
       disable-legacy-endpoints = "true"
